@@ -1,0 +1,116 @@
+<html>
+<!--响应式 元信息-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/index_work.css" type="text/css"></link>
+<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script
+      src="https:code.jquery.com/jquery-3.3.1-min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <h1 align="center" ><button>主页面</button></h1>
+    <h2 align="center" >
+        <button>
+            <c:if test="${useres.ubiaoshi==1}">${useres.uname}教师在线</c:if>
+            <c:if test="${useres.ubiaoshi==2}">${useres.uname}学生在线</c:if>
+            <c:if test="${useres.ubiaoshi==null}">游客在线</c:if>
+        </button>
+    </h2>
+    <h2 align="center" >
+        <input type="button" value="学生注册" onclick="zhuce('${useres.uid}')">
+        <input type="button" value="登入" onclick="dengru('${useres.uid}')">
+        <input type="button" value="教师批量注册多名学生" onclick="jiaoshizhuce('${useres.ubiaoshi}','${useres.uid}','${useres.uname}')">
+    </h2>
+    <h2 align="center">
+        <input type="button" value="教师审核" onclick="shenhe('${useres.ubiaoshi}','${useres.uid}','${useres.uname}')">
+        <input type="button" value="个人信息" onclick="gerenxinxi('${useres.ubiaoshi}','${useres.uid}')">
+        <input type="button" value="教师修改学生个人信息" onclick="jiaoshixiugaixuesheng('${useres.ubiaoshi}','${useres.uid}')">
+    </h2>
+    <h2 align="center">
+            <input type="button" value="技术提问" onclick="tiwen('${useres.ubiaoshi}','${useres.uid}')">
+            <input type="button" value="历史问题" onclick="lishiwenti('${useres.uid}')">
+            <input type="button" value="自己问题的回复情况" onclick="">
+    </h2>
+    <h2 align="center" >
+        <input type="button" value="签到" onclick="">
+        <input type="button" value="刷新本页面" onclick="shuaxin()" align="center">
+        <input type="button" value="异常查询" onclick="">
+        <input type="button" value="教师回复等级排行榜" onclick="">
+    </h2>
+
+    <script type="text/javascript">
+        function shuaxin() {
+            //刷新当前页面
+            document.location.reload();
+        }
+        function zhuce() {
+            //前往注册页面
+            window.location.href="${pageContext.request.contextPath}/kjfl/zhuce";
+        }
+        function jiaoshizhuce(ubiaoshi) {
+            if (ubiaoshi==1){
+                //前往批量注册注册页面
+                window.location.href="${pageContext.request.contextPath}/kjfl/piliangzhuce";
+            } else {
+                alert("只有老师可以批量注册学生");
+            }
+        }
+        function dengru(uid) {
+            //前往登入页面
+            window.location.href="${pageContext.request.contextPath}/kjfl/dengru?uid="+uid;
+        }
+        function shenhe(ubiaoshi,ujid,ujname) {
+            if (ubiaoshi==1){
+                //前往审核页面
+                window.location.href="${pageContext.request.contextPath}/kjfl/shenhe?ujid="+ujid+"&ujname"+ujname+"&ujbiaoshi="+ubiaoshi;
+            } else {
+                alert("学生与游客无权审核");
+            }
+        }
+        function gerenxinxi(ubiaoshi,uid) {
+            if (ubiaoshi!=""){
+                //前往审核页面
+                window.location.href="${pageContext.request.contextPath}/kjfl/gerenxinxi?uid="+uid;
+            } else {
+                alert("游客无个人信息");
+            }
+        }
+        function jiaoshixiugaixuesheng(ubiaoshi,ujid) {
+            if (ubiaoshi==1){
+                //前往教师修改学生页面
+                window.location.href="${pageContext.request.contextPath}/kjfl/jiaoshixiugaixuesheng?ujid="+ujid;
+            } else {
+                alert("只有老师可以修改学生详细信息");
+            }
+        }
+        function tiwen(ubiaoshi,uid) {
+            if (ubiaoshi==2){
+                //前往教师修改学生页面
+                window.location.href="${pageContext.request.contextPath}/kjfl/tiwenti?uid="+uid;
+            } else {
+                alert("只有学生可以提问");
+            }
+        }
+        function lishiwenti(uid) {
+            //前往历史问题页面
+            window.location.href="${pageContext.request.contextPath}/kjfl/lishiwenti?uid="+uid;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--加载驱动jar包-->
+    <classPathEntry location="D:\maven\repo\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+
+    <!--上下文的配置-->
+    <context id="gcjTables" targetRuntime="MyBatis3">
+
+        <!--生成Mapper注解-->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+
+
+        <!--生成序列化的接口-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+
+        <!--生成toString方法-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!--连接配置-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/kjfl"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <!--关于小数的映射类型-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--Java Bean -->
+        <javaModelGenerator targetPackage="www.kjfl.com.pingtai.bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <!--JavaBean对应Mapper.xml文件-->
+        <sqlMapGenerator targetPackage="www.kjfl.com.pingtai.bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--JavaBean数据库操作的DAO接口文件-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="www.kjfl.com.pingtai.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--&lt;!&ndash;哪些表需要生成&ndash;&gt;-->
+        <!--<table schema="" tableName="user" domainObjectName="Useres"/>-->
+        <!--<table schema="" tableName="xueyuan" domainObjectName="XueYuan"/>-->
+        <!--<table schema="" tableName="jingli" domainObjectName="JingLi"/>-->
+        <!--<table schema="" tableName="tiwen" domainObjectName="TiWen"/>-->
+        <!--<table schema="" tableName="huifu" domainObjectName="HuiFu"/>-->
+        <!--<table schema="" tableName="pingjia" domainObjectName="PingJia"/>-->
+        <table schema="" tableName="qiandao" domainObjectName="QianDao"/>
+
+    </context>
+</generatorConfiguration>
